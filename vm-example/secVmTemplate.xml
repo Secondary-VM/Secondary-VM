@@ -1,0 +1,62 @@
+<domain type='kvm'>
+  <name>SecVMPRIIDSECID</name>
+  <memory unit='KiB'>SECMEM</memory>
+  <currentMemory unit='KiB'>SECMEM</currentMemory>
+  <!--MEMLOCK-->
+  <vcpu placement='static'>SECVCPUS</vcpu>
+  <os>
+    <type arch='x86_64' machine='q35'>hvm</type>
+    <loader readonly='no' secure='yes' type='pflash'>/usr/bin/tmp/OVMF.fd</loader>
+    <boot dev='hd'/>
+    <bootmenu enable='yes'/>
+  </os>
+  <secondary parent='PRIID'/>
+  <features>
+    <acpi/>
+    <apic/>
+    <smm state='on'/>
+  </features>
+  <cpu mode='host-model' check='partial'>
+    <model fallback='allow'/>
+  </cpu>
+  <clock offset='utc'>
+    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='pit' tickpolicy='delay'/>
+    <timer name='hpet' present='no'/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/bin/tmp/qemu/bin/debug/native/qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='DISKTYPE'/>
+      <source file='DISKNAME' index='1'/>
+      <backingStore/>
+      <target dev='vdb' bus='virtio'/>
+      <alias name='virtio-disk0'/>
+    </disk>
+    <serial type='pty'>
+       <target port='0'/>
+    </serial>
+    <console type='pty'>
+       <target type='serial' port='0'/>
+    </console>
+    <controller type='virtio-serial' index='0'>
+      <driver iommu='on'/>
+    </controller>
+    <controller type='scsi' index='0' model='virtio-scsi'>
+      <driver iommu='on'/>
+    </controller>
+    <interface type='network'>
+     <mac address='52:54:00:65:29:2SECID'/>
+     <source network='priVM01'/>
+    </interface>
+  </devices>
+  <!--ENCRYPT-->
+</domain>
+
