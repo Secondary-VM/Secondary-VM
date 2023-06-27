@@ -5,7 +5,8 @@
 - A host machine that is installed and enabled with the virtualization modules and packages.
 - Suggested host/guest OS: Ubuntu 20.04 or newer, RHEL 8.5 or newer.
 - A primary VM disk image that contains a [client daemon](https://github.com/Secondary-VM/Secondary-VM/blob/main/vm-example/secondary_vm.c).
-- A secondary drive that is hotplugged to the primary VM and contains a secondary VM disk image. 
+- A secondary drive that is hotplugged to the primary VM and contains a secondary VM disk image.
+- The host machine contains [secVmTemplate.xml](https://github.com/Secondary-VM/Secondary-VM/blob/main/vm-example/secVmTemplate.xml) in `/var/lib/libvirt/`. 
 
 To run AMD-based confidential primary and secondary VMs, you need: 
 
