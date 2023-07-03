@@ -15,7 +15,7 @@ To run AMD-based confidential primary and secondary VMs, you need:
 
 ## Steps to run a secVM demo
 
-1. Compile the secVM-enabled libvirt code: https://github.com/Secondary-VM/libvirt
+1. Compile the secVM-enabled Libvirt code: https://github.com/Secondary-VM/libvirt/tree/dev 
 2. In your build environment, run the `virtlockd`, `virtlogd`, and `libvirtd` binaries.
 3. Spawn a primary VM: `./virsh create Secondary-VM/vm-example/primaryVM01.xml`
 4. Spawn a secondary VM by running `secondary_vm` commands in the primary VM. For example, if the primary VM requests to spawn/create an encrypted secondary VM with 2 vCPUs, 4 GB memory, and using `secVM1.img` raw disk image, the command is: `sudo ./secondary_vm -c 2 -m 4 -d secVM1.img -t raw -e 1 create`.
